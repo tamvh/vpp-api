@@ -58,6 +58,16 @@ public class LoginController extends HttpServlet {
             case "login":
                 content = login(req, data);
                 break;
+            case "changepassword":
+                content = changepassword(req, data);
+                break;
+            case "insert_account":
+                content = insertAccount(req, data);
+                break;
+            case "block_account":
+                content = blockAccount(req, data);
+                break;
+            
         }
         
         CommonModel.out(content, resp);
@@ -117,4 +127,48 @@ public class LoginController extends HttpServlet {
         
         return content;
     }
+    
+    private String changepassword(HttpServletRequest req, String data) {
+        String content;
+        int ret = AppConst.ERROR_GENERIC;
+        try {
+            JsonObject jsonObject = JsonParserUtil.parseJsonObject(data);
+            if (jsonObject == null) {
+                content = CommonModel.FormatResponse(ret, "Invalid parameter");
+            } else {                
+                String userName = jsonObject.get("u").getAsString();
+                String o_p = jsonObject.get("o_p").getAsString();
+                String n_p = jsonObject.get("n_p").getAsString();
+
+                if (userName.isEmpty() || o_p.isEmpty() || n_p.isEmpty()) {
+                    content = CommonModel.FormatResponse(ret, "Invalid parameter");
+                } else {
+                    ret = AccountModel.getInstance().changePW(userName, o_p, n_p);
+                    switch (ret) {
+                        case 0:         
+                            content = CommonModel.FormatResponse(AppConst.NO_ERROR, "change password success");
+                            break;                 
+                        default:
+                            content = CommonModel.FormatResponse(AppConst.ERROR_GENERIC, "change password faile");
+                            break;
+                    }
+                }
+            }
+        } catch (IOException ex) {
+            logger.error(getClass().getSimpleName() + ".changepassword: " + ex.getMessage(), ex);
+            content = CommonModel.FormatResponse(ret, ex.getMessage());
+        }
+        
+        return content;
+    }
+
+    private String insertAccount(HttpServletRequest req, String data) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private String blockAccount(HttpServletRequest req, String data) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    
 }
