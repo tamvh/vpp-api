@@ -22,6 +22,8 @@ public class AppConst {
     public static final int HAVE_NOT_PERMISSION = 102;
     public static final int ERROR_CHANGE_PASSWORD = 103;
     public static final int ERROR_CUR_PASSWORD_NOT_MATCHING = 104;
+    public static final int ERROR_USER_AND_MACADDRES_NOT_MATCHING = 105;
+    public static final int ERROR_USER_AND_MACADDRES_MATCHING_IS_EXISTED = 106;
     
     //invoice package
     public static final int INFO_INVC_AUDIT_STATUS_COMPLETED   = 1;
