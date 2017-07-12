@@ -40,6 +40,35 @@ public class AccountModel {
         }
         return _instance;
     }
+    
+    public int insertAccount(String u) {
+        int ret = -1;
+        Connection connection = null;
+        Statement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            String queryStr;
+            String accountTableName = "account";
+            connection = MySqlFactory.getConnection();
+            stmt = connection.createStatement();
+            queryStr = String.format("INSERT INTO %1$s (account_name) VALUES ('%2$s')",
+                    accountTableName, u);
+            System.out.println("Query insertAccount: " + queryStr);
+            int result = stmt.executeUpdate(queryStr);
+            if(result > 0) {
+                ret = 0;
+            }
+        } catch (SQLException ex) {
+            java.util.logging.Logger.getLogger(AccountModel.class.getName()).log(Level.SEVERE, null, ex);
+            ret = -1;
+        } finally {
+            MySqlFactory.safeClose(rs);
+            MySqlFactory.safeClose(stmt);
+            MySqlFactory.safeClose(connection);
+        }
+        return ret;
+    }
 
     public int checkLogin(String username, String password, JsonObject account) {
 

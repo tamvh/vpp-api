@@ -163,7 +163,35 @@ public class LoginController extends HttpServlet {
     }
 
     private String insertAccount(HttpServletRequest req, String data) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String content;
+        int ret = AppConst.ERROR_GENERIC;
+        try {
+            JsonObject jsonObject = JsonParserUtil.parseJsonObject(data);
+            if (jsonObject == null) {
+                content = CommonModel.FormatResponse(ret, "Invalid parameter");
+            } else {                
+                String u = jsonObject.get("u").getAsString();
+
+                if (u.isEmpty()) {
+                    content = CommonModel.FormatResponse(ret, "Invalid parameter");
+                } else {
+                    ret = AccountModel.getInstance().insertAccount(u);
+                    switch (ret) {
+                        case 0:         
+                            content = CommonModel.FormatResponse(AppConst.NO_ERROR, "insert account success");
+                            break;                 
+                        default:
+                            content = CommonModel.FormatResponse(AppConst.ERROR_GENERIC, "insert account faile");
+                            break;
+                    }
+                }
+            }
+        } catch (IOException ex) {
+            logger.error(getClass().getSimpleName() + ".changepassword: " + ex.getMessage(), ex);
+            content = CommonModel.FormatResponse(ret, ex.getMessage());
+        }
+        
+        return content;
     }
 
     private String blockAccount(HttpServletRequest req, String data) {
