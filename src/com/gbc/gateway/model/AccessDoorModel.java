@@ -39,6 +39,47 @@ public class AccessDoorModel {
         return _instance;
     }
     
+    public int matchingUser2Door(String u, String mac) {
+        int ret = -1;
+        Connection connection = null;
+        Statement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            String queryStr;
+            String TableName = "access_door";
+            connection = MySqlFactory.getConnection();
+            stmt = connection.createStatement();
+
+            queryStr = String.format("SELECT * FROM %1$s"
+                    + " WHERE `account_name` = '%2$s' AND `mac_address` = '%3$s",
+                    TableName, u, mac);
+            System.out.println("Query get matchingUser2Door: " + queryStr);
+            stmt.execute(queryStr);
+            rs = stmt.getResultSet();
+            if (rs != null) {
+                if (rs.next()) {
+                    queryStr = String.format("INSERT INTO %1$s (account_name, mac_address) VALUES ('%2$s', '%3$s')",
+                    TableName, u ,mac);
+                    System.out.println("Query insert matchingUser2Door: " + queryStr);
+                    if (stmt.executeUpdate(queryStr) > 0) {
+                        ret = 0;
+                    }
+                } else {
+                    ret = 1; //tài khoản không tồn tại
+                }
+            }
+        } catch (SQLException ex) {
+            java.util.logging.Logger.getLogger(AccountModel.class.getName()).log(Level.SEVERE, null, ex);
+            ret = -1;
+        } finally {
+            MySqlFactory.safeClose(rs);
+            MySqlFactory.safeClose(stmt);
+            MySqlFactory.safeClose(connection);
+        }
+        return ret;
+    }
+    
     public int checkAccessDoor(String username, String mac_address){
         int ret = -1;
         Connection connection = null;
@@ -47,13 +88,13 @@ public class AccessDoorModel {
         
         try {
             String queryStr;
-            String accountTableName = "access_door";        
+            String TableName = "access_door";        
             connection = MySqlFactory.getConnection();
             stmt = connection.createStatement();
             
             queryStr =String.format("SELECT * FROM %1$s"
                     + " WHERE `account_name` = '%2$s' AND `mac_address` = '%3$s'", 
-                    accountTableName,  username, mac_address);
+                    TableName,  username, mac_address);
             System.out.println("checkAccessDoor: " + queryStr);
             stmt.execute(queryStr);
             rs = stmt.getResultSet();

@@ -54,7 +54,10 @@ public class AccessDoorController extends HttpServlet{
         switch (cmd) {            
             case "access":
                 content = access(req, data);
-                break;           
+                break; 
+            case "matchinguser2door":
+                content = matchinguser2door(req, data);
+                break; 
         }
         
         CommonModel.out(content, resp);
@@ -85,6 +88,43 @@ public class AccessDoorController extends HttpServlet{
             }
         } catch (IOException ex) {
             logger.error(getClass().getSimpleName() + ".login: " + ex.getMessage(), ex);
+            content = CommonModel.FormatResponse(ret, ex.getMessage());
+        }
+        
+        return content;
+    }
+
+    private String matchinguser2door(HttpServletRequest req, String data) {
+        String content;
+        int ret = AppConst.ERROR_GENERIC;
+        
+        try {
+            JsonObject jsonObject = JsonParserUtil.parseJsonObject(data);
+            if (jsonObject == null) {
+                content = CommonModel.FormatResponse(ret, "Invalid parameter");
+            } else {                
+                String userName = jsonObject.get("u").getAsString();
+                String mac_address = jsonObject.get("m").getAsString();
+
+                if (userName.isEmpty() || mac_address.isEmpty()) {
+                    content = CommonModel.FormatResponse(ret, "Invalid parameter");
+                } else {
+                    ret = AccessDoorModel.getInstance().matchingUser2Door(userName, mac_address);
+                    switch (ret) {
+                        case 0:
+                            content = CommonModel.FormatResponse(AppConst.NO_ERROR, "matching success");
+                            break;
+                        case 1:
+                            content = CommonModel.FormatResponse(AppConst.ERROR_USER_AND_MACADDRES_MATCHING_IS_EXISTED, "this maching is existed");
+                            break;
+                        default:
+                            content = CommonModel.FormatResponse(AppConst.ERROR_USER_AND_MACADDRES_NOT_MATCHING, "matching faile");
+                            break;
+                    }
+                }
+            }
+        } catch (IOException ex) {
+            logger.error(getClass().getSimpleName() + ".matchinguser2door: " + ex.getMessage(), ex);
             content = CommonModel.FormatResponse(ret, ex.getMessage());
         }
         
