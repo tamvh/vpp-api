@@ -3,9 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/Volumes/data/project/vngcampus/dev/vanphongpham/vpp-api/src/com/gbc/gateway/model/AccessDoorModel.java</file>
             <file>file:/Volumes/data/project/vngcampus/dev/vanphongpham/vpp-api/src/com/gbc/gateway/model/AccountModel.java</file>
             <file>file:/Volumes/data/project/vngcampus/dev/vanphongpham/vpp-api/src/com/gbc/gateway/controller/LoginController.java</file>
-            <file>file:/Volumes/data/project/vngcampus/dev/vanphongpham/vpp-api/vpp-api.conf</file>
+            <file>file:/Volumes/data/project/vngcampus/dev/vanphongpham/vpp-api/src/com/gbc/gateway/controller/AccessDoorController.java</file>
         </group>
     </open-files>
 </project-private>

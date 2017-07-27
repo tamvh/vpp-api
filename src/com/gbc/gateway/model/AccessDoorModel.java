@@ -59,16 +59,18 @@ public class AccessDoorModel {
             rs = stmt.getResultSet();
             if (rs != null) {
                 if (rs.next()) {
-                    queryStr = String.format("INSERT INTO %1$s (account_name, mac_address) VALUES ('%2$s', '%3$s')",
-                    TableName, u ,mac);
-                    System.out.println("Query insert matchingUser2Door: " + queryStr);
-                    if (stmt.executeUpdate(queryStr) > 0) {
-                        ret = 0;
-                    }
-                } else {
                     ret = 1; //tài khoản không tồn tại
                 }
             }
+            if(ret != 1) {
+                queryStr = String.format("INSERT INTO %1$s (account_name, mac_address) VALUES ('%2$s', '%3$s')",
+                TableName, u, mac);
+                System.out.println("Query insert matchingUser2Door: " + queryStr);
+                if (stmt.executeUpdate(queryStr) > 0) {
+                    ret = 0;
+                }
+            }
+            
         } catch (SQLException ex) {
             java.util.logging.Logger.getLogger(AccountModel.class.getName()).log(Level.SEVERE, null, ex);
             ret = -1;

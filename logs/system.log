@@ -838,3 +838,25 @@ Caused by: org.apache.commons.configuration.ConfigurationException: Cannot locat
 2017-07-05 10:15:40  INFO AbstractConnector:320 - Stopped ServerConnector@a6edd2d{HTTP/1.1,[http/1.1]}{0.0.0.0:8181}
 2017-07-05 10:15:40  INFO ContextHandler:932 - Stopped o.e.j.s.ServletContextHandler@4be03219{/,null,UNAVAILABLE}
 2017-07-05 10:15:40  INFO ContextHandler:932 - Stopped o.e.j.s.h.ContextHandler@2e76d70{/static,null,UNAVAILABLE}
+2017-07-06 09:49:10  INFO log:192 - Logging initialized @1353ms to org.eclipse.jetty.util.log.Slf4jLog
+2017-07-06 09:49:10  INFO WebServer:60 - Start server...
+2017-07-06 09:49:11  INFO Server:372 - jetty-9.4.1.v20170120
+2017-07-06 09:49:11  INFO ContextHandler:791 - Started o.e.j.s.h.ContextHandler@5ff81216{/static,null,AVAILABLE}
+2017-07-06 09:49:11  INFO ContextHandler:791 - Started o.e.j.s.ServletContextHandler@181d13fe{/,null,AVAILABLE}
+2017-07-06 09:49:11  INFO AbstractConnector:280 - Started ServerConnector@65a2934f{HTTP/1.1,[http/1.1]}{0.0.0.0:8181}
+2017-07-06 09:49:12  INFO Server:444 - Started @2550ms
+2017-07-06 09:49:22  INFO ServiceDaemon:30 - Shutdown thread before webserver getinstance
+2017-07-06 09:49:22  INFO AbstractConnector:320 - Stopped ServerConnector@65a2934f{HTTP/1.1,[http/1.1]}{0.0.0.0:8181}
+2017-07-06 09:49:22  INFO ContextHandler:932 - Stopped o.e.j.s.ServletContextHandler@181d13fe{/,null,UNAVAILABLE}
+2017-07-06 09:49:22  INFO ContextHandler:932 - Stopped o.e.j.s.h.ContextHandler@5ff81216{/static,null,UNAVAILABLE}
+2017-07-06 09:49:36  INFO log:192 - Logging initialized @3293ms to org.eclipse.jetty.util.log.Slf4jLog
+2017-07-06 09:49:36  INFO WebServer:60 - Start server...
+2017-07-06 09:49:36  INFO Server:372 - jetty-9.4.1.v20170120
+2017-07-06 09:49:37  INFO ContextHandler:791 - Started o.e.j.s.h.ContextHandler@36a93799{/static,null,AVAILABLE}
+2017-07-06 09:49:37  INFO ContextHandler:791 - Started o.e.j.s.ServletContextHandler@3c41f59a{/,null,AVAILABLE}
+2017-07-06 09:49:37  INFO AbstractConnector:280 - Started ServerConnector@1eeb903f{HTTP/1.1,[http/1.1]}{0.0.0.0:8181}
+2017-07-06 09:49:37  INFO Server:444 - Started @4541ms
+2017-07-06 09:56:04  INFO ServiceDaemon:30 - Shutdown thread before webserver getinstance
+2017-07-06 09:56:04  INFO AbstractConnector:320 - Stopped ServerConnector@1eeb903f{HTTP/1.1,[http/1.1]}{0.0.0.0:8181}
+2017-07-06 09:56:04  INFO ContextHandler:932 - Stopped o.e.j.s.ServletContextHandler@3c41f59a{/,null,UNAVAILABLE}
+2017-07-06 09:56:04  INFO ContextHandler:932 - Stopped o.e.j.s.h.ContextHandler@36a93799{/static,null,UNAVAILABLE}
