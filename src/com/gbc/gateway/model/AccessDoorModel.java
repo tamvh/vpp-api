@@ -95,9 +95,8 @@ public class AccessDoorModel {
             stmt = connection.createStatement();
             
             // check full access
-            queryStr =String.format("SELECT * FROM %1$s"
-                    + " WHERE `account_name` = '%2$s' AND `account_type` = 1", 
-                    TableName,  username);
+            queryStr =String.format("SELECT * FROM account"
+                    + " WHERE `account_name` = '%1$s' AND `account_type` = 1", username);
             System.out.println("check full access query: " + queryStr);
             stmt.execute(queryStr);
             rs = stmt.getResultSet();
