@@ -68,7 +68,7 @@ public class AccountModel {
         return ret;
     }
     
-    public int insertAccount(String u) {
+    public int insertAccount(String u, int acc_type) {
         int ret = -1;
         Connection connection = null;
         Statement stmt = null;
@@ -79,8 +79,8 @@ public class AccountModel {
             String accountTableName = "account";
             connection = MySqlFactory.getConnection();
             stmt = connection.createStatement();
-            queryStr = String.format("INSERT INTO %1$s (account_name) VALUES ('%2$s')",
-                    accountTableName, u);
+            queryStr = String.format("INSERT INTO %1$s (account_name, password, account_type) VALUES ('%2$s', PASSWORD('123456'), %3$d)",
+                    accountTableName, u, acc_type);
             System.out.println("Query insertAccount: " + queryStr);
             int result = stmt.executeUpdate(queryStr);
             if(result > 0) {

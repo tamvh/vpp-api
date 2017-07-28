@@ -171,11 +171,11 @@ public class LoginController extends HttpServlet {
                 content = CommonModel.FormatResponse(ret, "Invalid parameter");
             } else {                
                 String u = jsonObject.get("u").getAsString();
-
-                if (u.isEmpty()) {
+                int acc_type = jsonObject.get("acc_type").getAsInt();
+                if (u.isEmpty() && acc_type < 0) {
                     content = CommonModel.FormatResponse(ret, "Invalid parameter");
                 } else {
-                    ret = AccountModel.getInstance().insertAccount(u);
+                    ret = AccountModel.getInstance().insertAccount(u, acc_type);
                     switch (ret) {
                         case 0:         
                             content = CommonModel.FormatResponse(AppConst.NO_ERROR, "insert account success");
@@ -224,6 +224,10 @@ public class LoginController extends HttpServlet {
         }
         
         return content;
+    }
+
+    private void getAsInt() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     

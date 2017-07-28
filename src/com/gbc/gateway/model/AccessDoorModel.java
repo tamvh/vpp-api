@@ -94,6 +94,20 @@ public class AccessDoorModel {
             connection = MySqlFactory.getConnection();
             stmt = connection.createStatement();
             
+            // check full access
+            queryStr =String.format("SELECT * FROM %1$s"
+                    + " WHERE `account_name` = '%2$s' AND `account_type` = 1", 
+                    TableName,  username);
+            System.out.println("check full access query: " + queryStr);
+            stmt.execute(queryStr);
+            rs = stmt.getResultSet();
+            if (rs != null) {
+                if (rs.next()) {
+                    ret = 0;
+                    return ret;
+                }               
+            }            
+            
             queryStr =String.format("SELECT * FROM %1$s"
                     + " WHERE `account_name` = '%2$s' AND `mac_address` = '%3$s'", 
                     TableName,  username, mac_address);
